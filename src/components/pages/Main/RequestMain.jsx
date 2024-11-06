@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import RequestCard from '../Request/Card/RequestCard';
 import { Container } from './style';
 import TopContainer from '../Home/Main/ContainerComponent/TopContainer/TopContainer';
 import { useNavigate } from 'react-router-dom';
+import { getHomeRequests } from '../../../api/request';
 
 const RequestMain = () => {
+  const [requestData, setRequestData] = useState([]);
   const navigate = useNavigate();
   const registRequest = () => {
     navigate('/project/regist');
@@ -12,19 +14,29 @@ const RequestMain = () => {
   const showMore = () => {
     navigate('/project');
   };
+  useEffect(() => {
+    const getHomeData = async () => {
+      try {
+        const res = await getHomeRequests();
+        setRequestData(res.data);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    getHomeData();
+  }, []);
   return (
     <Container>
       <TopContainer
         isRequest={true}
         onClickHandler={registRequest}
         text={'Requests'}
-        count={'734,674'}
+        count={requestData.totalProjectCnt}
         showMore={showMore}
       />
-      <RequestCard />
-      <RequestCard />
-      <RequestCard />
-      <RequestCard />
+      {requestData.data?.map((request, index) => (
+        <RequestCard key={index} requestData={request} />
+      ))}
     </Container>
   );
 };

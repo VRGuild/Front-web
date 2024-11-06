@@ -1,8 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container } from './style';
+import { Container, PageContainer } from './style';
 import TopContainer from '../../Home/Main/ContainerComponent/TopContainer/TopContainer';
 import QnaCard from '../Card/QnaCard';
+import PageNationComponent from '../../../common/PageNation/PageNationContainer/PageNationComponent';
 const QnaHomeComponent = () => {
   const navigate = useNavigate();
   const registQuestion = () => {
@@ -29,6 +30,9 @@ const QnaHomeComponent = () => {
       <QnaCard />
       <QnaCard />
       <QnaCard />
+      <PageContainer>
+        <PageNationComponent />
+      </PageContainer>
     </Container>
   );
 };

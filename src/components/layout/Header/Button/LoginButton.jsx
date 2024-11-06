@@ -17,9 +17,9 @@ const LoginButton = (props) => {
         fontcolor="#1B75D0"
         bordercolor="#1B75D0"
         onClickHandler={handleloginRedirect}
-        text="Log in"
+        text="Log out"
       />
-      <Button onClickHandler={handleSignupButtonClick} text="Sign up" />
+      {/* <Button onClickHandler={handleSignupButtonClick} text="Sign up" /> */}
     </ButtonContainer>
   );
 };

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { GetAxiosInstance, PostAxiosInstance } from '../axios/AxiosMethod';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 const url = `${import.meta.env.VITE_LOGIN_URL}${import.meta.env.VITE_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_REDIRECT_URL}&response_type=code&scope=basic_profile&scope=friends_list&scope=presence`;
@@ -51,6 +52,48 @@ export const getRefresh = async (refreshToken) => {
     localStorage.setItem('accessToken', res.data.access_token);
     localStorage.setItem('refreshToken', res.data.refresh_token);
     console.log(res);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const checkIsRegisted = async () => {
+  try {
+    const res = await GetAxiosInstance('/api/auth/epicgames/login');
+    console.log(res.status);
+    if (res?.status == '222') return true;
+    else return false;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const registClientGroup = async ({
+  clientType,
+  groupName,
+  managerName,
+  managerPhone,
+}) => {
+  try {
+    const res = await PostAxiosInstance('/api/user/group', {
+      clientType,
+      groupName,
+      managerName,
+      managerPhone,
+    });
+    return res;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const registClientIndividual = async ({ name, phone }) => {
+  try {
+    const res = await PostAxiosInstance('/api/user/individual', {
+      name: name,
+      phone: phone,
+    });
+    return res;
   } catch (e) {
     console.error(e);
   }

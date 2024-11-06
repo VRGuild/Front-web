@@ -28,3 +28,11 @@ button {
   text-decoration: none;
   cursor: pointer;
 }
+
+input::placeholder {
+  color: #888;
+}
+
+input:focus {
+  outline: none;
+}

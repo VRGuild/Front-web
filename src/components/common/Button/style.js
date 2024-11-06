@@ -18,5 +18,6 @@ export const CustomButton = styled.button`
   line-height: 1.38438rem;
   padding: 0.8rem;
   border-radius: 0.7rem;
+  border-width: 2px;
   border-style: solid;
 `;
