@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Container,
   TopContainer,
@@ -7,34 +7,61 @@ import {
   LikeIcon,
   Title,
   BottomContainer,
+  StyledLink,
 } from './style';
 import InfoLabel from './InfoLabel/InfoLabel';
 import Label from '../../../common/Label/Label';
-const RequestCard = () => {
+
+const RequestCard = ({ requestData }) => {
+  const [labelData, setLabelData] = useState([]);
+  const [deadLine, setDeadLine] = useState(0);
+  useEffect(() => {
+    const newLabels = [];
+    if (requestData.workType === 'both') newLabels.push('상주', '원격');
+    else if (requestData.workType === 'local') newLabels.push('상주');
+    else newLabels.push('원격');
+
+    if (requestData.progressClassification === 'new') newLabels.push('신규');
+    else newLabels.push('리뉴얼');
+
+    setLabelData(newLabels);
+  }, [requestData]);
+  useEffect(() => {
+    const calculateDaysUntilDeadline = () => {
+      const today = new Date();
+      const deadline = new Date(requestData.deadlineDate);
+      const differenceInTime = deadline - today;
+      const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+      setDeadLine(differenceInDays);
+    };
+    calculateDaysUntilDeadline();
+  }, [requestData]);
   return (
-    <Container>
-      <TopContainer>
-        <InfoLabelContainer>
-          <InfoLabel text={'개발자'} />
-          <InfoLabel text={'3개월'} />
-          <InfoLabel text={'상주'} />
-          <InfoLabel text={'상암/디지털미디어시티역'} />
-        </InfoLabelContainer>
-        <LikeIcon src="src/assets/svgs/like_icon.svg" />
-      </TopContainer>
-      <Title>
-        {
-          '[상주][중급/C#(winform)/약3개월/디지털미디어시티역/2명]기업 내부 시스템'
-        }
-      </Title>
-      <BottomContainer>
-        <LabelContainer>
-          <Label text={'중급'} />
-          <Label text={'C#'} />
-        </LabelContainer>
-        <Label text={'마감 8일전'} />
-      </BottomContainer>
-    </Container>
+    <>
+      {requestData && (
+        <Container>
+          <TopContainer>
+            <InfoLabelContainer>
+              {labelData.map((text, index) => (
+                <InfoLabel key={index} text={text} />
+              ))}
+            </InfoLabelContainer>
+            <LikeIcon src="src/assets/svgs/like_icon.svg" />
+          </TopContainer>
+          <StyledLink to={`/project/${requestData.projectId}`}>
+            <Title>{requestData.previewTitle}</Title>
+          </StyledLink>
+          <BottomContainer>
+            <LabelContainer>
+              {requestData?.requiredWorkers.map((text, index) => (
+                <Label key={index} text={text} />
+              ))}
+            </LabelContainer>
+            <Label text={'마감까지 ' + deadLine + '일'} />
+          </BottomContainer>
+        </Container>
+      )}
+    </>
   );
 };
 

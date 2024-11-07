@@ -4,7 +4,7 @@ import { SearchContainer, SearchBox, SearchIcon } from './style';
 const Search = () => {
   return (
     <SearchContainer>
-      <SearchIcon src="src/assets/svgs/search_button.svg" />
+      <SearchIcon src="../src/assets/svgs/search_button.svg" />
       <SearchBox placeholder="Search..." />
     </SearchContainer>
   );

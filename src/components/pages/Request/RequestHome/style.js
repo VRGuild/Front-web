@@ -6,3 +6,11 @@ export const Container = styled.div`
   width: 100%;
   flex-direction: column;
 `;
+
+export const PageContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 2rem;
+`;

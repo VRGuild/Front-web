@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -57,4 +58,10 @@ export const LabelContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 0.2rem;
+`;
+
+export const StyledLink = styled(Link)`
+  display: block;
+  text-decoration: none;
+  width: 100%;
 `;
