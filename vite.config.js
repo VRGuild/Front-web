@@ -6,14 +6,6 @@ import path from 'path';
 ///api/epic/oauth/v2/token
 export default defineConfig({
   server: {
-    proxy: {
-      '/api/epic': {
-        target: 'https://api.epicgames.dev', // 프록시할 API 서버
-        changeOrigin: true, // 호스트 헤더 변경
-        rewrite: (path) => path.replace(/^\/api/, ''), // 요청 경로 재작성
-        secure: false,
-      },
-    },
     port: 5173,
     host: '0.0.0.0',
   },

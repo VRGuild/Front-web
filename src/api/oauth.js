@@ -30,7 +30,11 @@ export const getToken = async () => {
       'Content-Type': 'application/x-www-form-urlencoded',
       Authorization: `Basic ${import.meta.env.VITE_BASIC_TOKEN}`,
     };
-    const res = await axios.post('/api/epic/oauth/v2/token', body, { headers });
+    const res = await axios.post(
+      'https://api.epicgames.dev/api/epic/auth/v2/token',
+      body,
+      { headers },
+    );
     localStorage.setItem('accessToken', res.data.access_token);
     localStorage.setItem('refreshToken', res.data.refresh_token);
   } catch (e) {
@@ -48,7 +52,11 @@ export const getRefresh = async (refreshToken) => {
       'Content-Type': 'application/x-www-form-urlencoded',
       Authorization: `Basic ${import.meta.env.VITE_BASIC_TOKEN}`,
     };
-    const res = await axios.post('/api/epic/oauth/v2/token', body, { headers });
+    const res = await axios.post(
+      'https://api.epicgames.dev/api/epic/oauth/v2/token',
+      body,
+      { headers },
+    );
     localStorage.setItem('accessToken', res.data.access_token);
     localStorage.setItem('refreshToken', res.data.refresh_token);
     console.log(res);
@@ -59,7 +67,7 @@ export const getRefresh = async (refreshToken) => {
 
 export const checkIsRegisted = async () => {
   try {
-    const res = await GetAxiosInstance('/api/auth/epicgames/login');
+    const res = await GetAxiosInstance('/api/oauth/epicgames/login');
     console.log(res.status);
     if (res?.status == '222') return true;
     else return false;
