@@ -46,9 +46,12 @@ export const getToken = async () => {
   try {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.post('code');
-    const res = await axios.post('/api/auth/epicgames/callback', {
-      code: code,
-    });
+    const res = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/api/auth/epicgames/callback`,
+      {
+        code: code,
+      },
+    );
     localStorage.setItem('accessToken', res.data.access_token);
     localStorage.setItem('refreshToken', res.data.refresh_token);
     return res;
@@ -85,7 +88,10 @@ export const getRefresh = async (refreshToken) => {
     const headers = {
       Authorization: refreshToken,
     };
-    const res = await axios.post('/api/auth/epicgames/callback', headers);
+    const res = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/api/auth/epicgames/callback`,
+      headers,
+    );
     localStorage.setItem('accessToken', res.data.access_token);
     localStorage.setItem('refreshToken', res.data.refresh_token);
     return res;
