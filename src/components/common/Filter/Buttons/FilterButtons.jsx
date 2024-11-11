@@ -8,6 +8,7 @@ import {
   DisabledButton,
   FilterIcon,
 } from './style';
+import filterIcon from '../../../../assets/svgs/filter_icon.svg';
 
 const FilterButtons = () => {
   const { sortingCriteria, setSorting } = useStore();
@@ -33,7 +34,7 @@ const FilterButtons = () => {
         )}
       </SortButtonContainer>
       <FilterButton>
-        <FilterIcon src="src/assets/svgs/filter_icon.svg" />
+        <FilterIcon src={filterIcon} />
         Filter
       </FilterButton>
     </Container>

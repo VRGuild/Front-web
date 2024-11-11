@@ -11,6 +11,7 @@ import {
 } from './style';
 import InfoLabel from './InfoLabel/InfoLabel';
 import Label from '../../../common/Label/Label';
+import linkIcon from '../../../../assets/svgs/like_icon.svg';
 
 const RequestCard = ({ requestData }) => {
   const [labelData, setLabelData] = useState([]);
@@ -46,7 +47,7 @@ const RequestCard = ({ requestData }) => {
                 <InfoLabel key={index} text={text} />
               ))}
             </InfoLabelContainer>
-            <LikeIcon src="src/assets/svgs/like_icon.svg" />
+            <LikeIcon src={linkIcon} />
           </TopContainer>
           <StyledLink to={`/project/${requestData.projectId}`}>
             <Title>{requestData.previewTitle}</Title>

@@ -15,6 +15,8 @@ import {
 import Button from '../../../common/Button/Button';
 import useStore from '../../../../zustand/Store';
 import StarLabel from '../../../common/StarLabel/StarLabel';
+import clientIcon from '../../../../assets/svgs/client_icon.svg';
+import partnersIcon from '../../../../assets/svgs/partners_icon.svg';
 
 const RegistStart = () => {
   const { registInfo, setRegistInfo, registPage, setRegistPage } = useStore();
@@ -40,7 +42,7 @@ const RegistStart = () => {
         <StarLabel text={'이용목적'} />
         <SelectBox onClick={handleClientClick}>
           <SelectButton info={registInfo === 'client'} />
-          <img src="src/assets/svgs/client_icon.svg" />
+          <img src={clientIcon} />
           <RegisterInfoContainer>
             <RegisterInfoTitle>클라이언트</RegisterInfoTitle>
             <RegisterInfo>
@@ -50,7 +52,7 @@ const RegistStart = () => {
         </SelectBox>
         <SelectBox onClick={handlePartnersClick}>
           <SelectButton info={registInfo === 'partners'} />
-          <img src="src/assets/svgs/partners_icon.svg" />
+          <img src={partnersIcon} />
           <RegisterInfoContainer>
             <RegisterInfoTitle>파트너스</RegisterInfoTitle>
             <RegisterInfo>
