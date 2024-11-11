@@ -8,15 +8,6 @@ export const handleloginRedirect = () => {
   window.location.href = url;
 };
 
-export const isRegisted = async () => {
-  try {
-    const res = await axios.get(`${baseURL}/`);
-    return res;
-  } catch (e) {
-    console.error(e);
-  }
-};
-
 // export const getToken = async () => {
 //   try {
 //     const urlParams = new URLSearchParams(window.location.search);
@@ -102,7 +93,9 @@ export const getRefresh = async (refreshToken) => {
 
 export const checkIsRegisted = async () => {
   try {
-    const res = await GetAxiosInstance('/api/oauth/epicgames/login');
+    const res = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}/api/oauth/epicgames/login`,
+    );
     console.log(res.status);
     if (res?.status == '222') return true;
     else return false;
