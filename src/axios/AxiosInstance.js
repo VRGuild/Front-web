@@ -10,7 +10,7 @@ axiosInstance.interceptors.request.use(
     if (!accessToken) {
       localStorage.clear();
       alert('로그인 해주세요');
-      window.location.href = '/home';
+      // window.location.href = '/home';
       throw new Error('토큰 없음');
     }
 
