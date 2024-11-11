@@ -49,6 +49,8 @@ export const getToken = async () => {
     const res = await axios.post('/api/auth/epicgames/callback', {
       code: code,
     });
+    localStorage.setItem('accessToken', res.data.access_token);
+    localStorage.setItem('refreshToken', res.data.refresh_token);
     return res;
   } catch (error) {
     console.error(error);
@@ -84,6 +86,8 @@ export const getRefresh = async (refreshToken) => {
       Authorization: refreshToken,
     };
     const res = await axios.post('/api/auth/epicgames/callback', headers);
+    localStorage.setItem('accessToken', res.data.access_token);
+    localStorage.setItem('refreshToken', res.data.refresh_token);
     return res;
   } catch (error) {
     console.error(error);
