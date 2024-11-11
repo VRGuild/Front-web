@@ -17,51 +17,76 @@ export const isRegisted = async () => {
   }
 };
 
+// export const getToken = async () => {
+//   try {
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const code = urlParams.get('code');
+//     const body = new URLSearchParams();
+//     body.append('grant_type', 'authorization_code');
+//     body.append('deployment_id', import.meta.env.VITE_DEPLOY_ID);
+//     body.append('scope', 'basic_profile friends_list presence');
+//     body.append('code', code);
+//     const headers = {
+//       'Content-Type': 'application/x-www-form-urlencoded',
+//       Authorization: `Basic ${import.meta.env.VITE_BASIC_TOKEN}`,
+//     };
+//     const res = await axios.post(
+//       'https://api.epicgames.dev/api/epic/auth/v2/token',
+//       body,
+//       { headers },
+//     );
+//     localStorage.setItem('accessToken', res.data.access_token);
+//     localStorage.setItem('refreshToken', res.data.refresh_token);
+//   } catch (e) {
+//     console.error(e);
+//   }
+// };
+
 export const getToken = async () => {
   try {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
-    const body = new URLSearchParams();
-    body.append('grant_type', 'authorization_code');
-    body.append('deployment_id', import.meta.env.VITE_DEPLOY_ID);
-    body.append('scope', 'basic_profile friends_list presence');
-    body.append('code', code);
-    const headers = {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: `Basic ${import.meta.env.VITE_BASIC_TOKEN}`,
-    };
-    const res = await axios.post(
-      'https://api.epicgames.dev/api/epic/auth/v2/token',
-      body,
-      { headers },
-    );
-    localStorage.setItem('accessToken', res.data.access_token);
-    localStorage.setItem('refreshToken', res.data.refresh_token);
-  } catch (e) {
-    console.error(e);
+    const res = await axios.post('/api/auth/epicgames/callback', {
+      code: code,
+    });
+    return res;
+  } catch (error) {
+    console.error(error);
   }
 };
 
+// export const getRefresh = async (refreshToken) => {
+//   try {
+//     const body = new URLSearchParams();
+//     body.append('grant_type', 'refresh_token');
+//     body.append('scope', 'basic_profile friends_list presence');
+//     body.append('refresh_token', refreshToken);
+//     const headers = {
+//       'Content-Type': 'application/x-www-form-urlencoded',
+//       Authorization: `Basic ${import.meta.env.VITE_BASIC_TOKEN}`,
+//     };
+//     const res = await axios.post(
+//       'https://api.epicgames.dev/api/epic/oauth/v2/token',
+//       body,
+//       { headers },
+//     );
+//     localStorage.setItem('accessToken', res.data.access_token);
+//     localStorage.setItem('refreshToken', res.data.refresh_token);
+//     console.log(res);
+//   } catch (e) {
+//     console.error(e);
+//   }
+// };
+
 export const getRefresh = async (refreshToken) => {
   try {
-    const body = new URLSearchParams();
-    body.append('grant_type', 'refresh_token');
-    body.append('scope', 'basic_profile friends_list presence');
-    body.append('refresh_token', refreshToken);
     const headers = {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: `Basic ${import.meta.env.VITE_BASIC_TOKEN}`,
+      Authorization: refreshToken,
     };
-    const res = await axios.post(
-      'https://api.epicgames.dev/api/epic/oauth/v2/token',
-      body,
-      { headers },
-    );
-    localStorage.setItem('accessToken', res.data.access_token);
-    localStorage.setItem('refreshToken', res.data.refresh_token);
-    console.log(res);
-  } catch (e) {
-    console.error(e);
+    const res = await axios.post('/api/auth/epicgames/callback', headers);
+    return res;
+  } catch (error) {
+    console.error(error);
   }
 };
 
