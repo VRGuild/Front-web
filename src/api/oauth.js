@@ -45,7 +45,7 @@ export const isRegisted = async () => {
 export const getToken = async () => {
   try {
     const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
+    const code = urlParams.post('code');
     const res = await axios.post('/api/auth/epicgames/callback', {
       code: code,
     });
