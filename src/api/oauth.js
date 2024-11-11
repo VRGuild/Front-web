@@ -36,13 +36,10 @@ export const handleloginRedirect = () => {
 export const getToken = async () => {
   try {
     const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.post('code');
-    const res = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/api/auth/epicgames/callback`,
-      {
-        code: code,
-      },
-    );
+    const code = urlParams.get('code');
+    const res = await axios.post(`${baseURL}/api/auth/epicgames/callback`, {
+      code: code,
+    });
     localStorage.setItem('accessToken', res.data.access_token);
     localStorage.setItem('refreshToken', res.data.refresh_token);
     console.log(res);
@@ -80,7 +77,7 @@ export const getRefresh = async (refreshToken) => {
       Authorization: refreshToken,
     };
     const res = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/api/auth/epicgames/callback`,
+      `${baseURL}/api/auth/epicgames/callback`,
       headers,
     );
     localStorage.setItem('accessToken', res.data.access_token);
