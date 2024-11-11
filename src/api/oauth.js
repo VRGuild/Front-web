@@ -45,7 +45,7 @@ export const getToken = async () => {
     );
     localStorage.setItem('accessToken', res.data.access_token);
     localStorage.setItem('refreshToken', res.data.refresh_token);
-    return res;
+    console.log(res);
   } catch (error) {
     console.error(error);
   }
@@ -93,9 +93,7 @@ export const getRefresh = async (refreshToken) => {
 
 export const checkIsRegisted = async () => {
   try {
-    const res = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/api/oauth/epicgames/login`,
-    );
+    const res = await GetAxiosInstance('/api/auth/epicgames/login');
     console.log(res.status);
     if (res?.status == '222') return true;
     else return false;
