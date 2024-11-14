@@ -20,7 +20,7 @@ import { registClient } from '../../../../api/oauth';
 import { useNavigate } from 'react-router-dom';
 
 const ClientInfo = () => {
-  const { setRegistPage } = useStore();
+  const { setRegistPage, setIsLogin } = useStore();
   const [nickName, setNickName] = useState('');
   const [businessName, setBusinessName] = useState('');
   const [managerName, setManagerName] = useState('');
@@ -65,7 +65,7 @@ const ClientInfo = () => {
         managerName: managerName,
         managerPhone: managerPhone,
       });
-
+      setIsLogin(true);
       navigate('/home');
     } catch (e) {
       console.error(e);
