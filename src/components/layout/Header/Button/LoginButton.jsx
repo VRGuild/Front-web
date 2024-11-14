@@ -21,7 +21,13 @@ const LoginButton = (props) => {
           text="Log in"
         />
       ) : (
-        <Button onClickHandler={() => localStorage.clear()} text="Log out" />
+        <Button
+          onClickHandler={() => {
+            localStorage.clear();
+            window.location.reload;
+          }}
+          text="Log out"
+        />
       )}
     </ButtonContainer>
   );
