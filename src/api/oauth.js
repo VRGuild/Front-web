@@ -107,7 +107,9 @@ export const registClient = async ({
   managerPhone,
 }) => {
   try {
-    const businessLogoUrl = await uploadFiles(businessLogo, 'logo/');
+    let fileURLs = [];
+    fileURLs = await uploadFiles(businessLogo, 'logo/');
+    const businessLogoUrl = fileURLs[0];
     return await PostAxiosInstance('/api/epic/business', {
       nickName,
       businessName,
