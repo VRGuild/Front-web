@@ -110,7 +110,7 @@ export const registClient = async ({
     let fileURLs = [];
     fileURLs = await uploadFiles(businessLogo, 'logo/');
     const businessLogoUrl = fileURLs[0];
-    return await PostAxiosInstance('/api/epic/business', {
+    return await PostAxiosInstance('/api/epic/businesses', {
       nickName,
       businessName,
       businessLogo: businessLogoUrl,
