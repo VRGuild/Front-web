@@ -29,19 +29,15 @@ const useStore = create((set) => ({
   totalPage: 59,
   setTotalPage: (page) => set({ totalPage: page }),
   projectInfo: {
-    workType: '',
-    progressClassification: '',
-    companyName: '',
+    userId: 0,
     title: '',
     content: '',
-    requiredClient: 0,
-    requiredServer: 0,
-    requiredDesign: 0,
-    requiredPlanner: 0,
-    requiredAIEngineer: 0,
-    startDateTime: '',
-    endDateTime: '',
-    estimatedCost: 0,
+    estimatedCost: '',
+    progressClassification: '',
+    workType: '',
+    requiredOccupationList: [],
+    startDate: '',
+    endDate: '',
   },
   setProjectInfo: (newInfo) =>
     set((state) => ({
@@ -50,6 +46,63 @@ const useStore = create((set) => ({
         ...newInfo,
       },
     })),
+  updateOccupation: (occupationName, newOccupation) =>
+    set((state) => {
+      const existingOccupation = state.projectInfo.requiredOccupationList.find(
+        (occupation) => occupation.occupationName === occupationName,
+      );
+
+      if (existingOccupation) {
+        const updatedList = state.projectInfo.requiredOccupationList.map(
+          (occupation) => {
+            if (occupation.occupationName === occupationName) {
+              return {
+                ...occupation,
+                ...newOccupation,
+              };
+            }
+            return occupation;
+          },
+        );
+        return {
+          projectInfo: {
+            ...state.projectInfo,
+            requiredOccupationList: updatedList,
+          },
+        };
+      } else {
+        return {
+          projectInfo: {
+            ...state.projectInfo,
+            requiredOccupationList: [
+              ...state.projectInfo.requiredOccupationList,
+              { occupationName, ...newOccupation },
+            ],
+          },
+        };
+      }
+    }),
+  isLogin: false,
+  setIsLogin: (login) => set({ isLogin: login }),
 }));
 
 export default useStore;
+
+/*
+{
+  "userId": 0,
+  "title": "string",
+  "content": "string",
+  "estimatedCost": 0,
+  "progressClassification": "string",
+  "workType": "string",
+  "requiredOccupationList": [
+    {
+      "occupationName": "string",
+      "occupationCount": 0
+    }
+  ],
+  "startDate": "2024-11-13",
+  "endDate": "2024-11-13"
+}
+*/

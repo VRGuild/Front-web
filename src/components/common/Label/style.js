@@ -10,9 +10,9 @@ export const LabelStyle = styled.div`
   background: #f1f2f3;
   color: #000;
   text-align: center;
-  font-family: 'Noto Sans KR';
+  font-family: Pretendard;
   font-size: 0.75rem;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.38438rem; /* 184.583% */
 `;

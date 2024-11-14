@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Container,
   Title,
@@ -8,6 +8,7 @@ import {
   HorizontalContainer,
   RoleContainer,
   ButtonContainer,
+  BlackLabel,
 } from './style';
 import StarLabel from '../../../../common/StarLabel/StarLabel';
 import SelectBox from '../../../../common/SelectBox/SelectBox';
@@ -16,9 +17,18 @@ import Button from '../../../../common/Button/Button';
 import useStore from '../../../../../zustand/Store';
 import { registRequestInfo } from '../../../../../api/request';
 import { useNavigate } from 'react-router-dom';
+import SelectComponent from '../../../../common/SelectComponent/SelectComponent';
+import SelectLabel from '../../../../common/SelectLabel/SelectLabel';
+import { uploadFiles } from '../../../../../api/file';
 
 const RequestRegistComponent = () => {
-  const { projectInfo, setProjectInfo } = useStore();
+  const { projectInfo, setProjectInfo, updateOccupation } = useStore();
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [file, setFile] = useState(null);
+
+  const addSelectLabel = (selectedOption) => {
+    setSelectedOptions((prev) => [...prev, selectedOption]);
+  };
   const navigate = useNavigate();
 
   const handleWorkType = (type) => {
@@ -42,18 +52,34 @@ const RequestRegistComponent = () => {
     console.log('실행됨');
     const newProjectInfo = {
       ...projectInfo,
-      startDateTime: '20' + projectInfo['startDateTime'],
-      endDateTime: '20' + projectInfo['endDateTime'],
+      startDate: '20' + projectInfo['startDate'],
+      endDate: '20' + projectInfo['endDate'],
     };
     return newProjectInfo;
   };
 
   const handleRegistButton = async () => {
-    await registRequestInfo(transformDate());
-
-    alert('프로젝트 의뢰가 등록되었습니다.');
-    navigate('/home');
+    try {
+      await registRequestInfo(transformDate());
+      alert('프로젝트 의뢰가 등록되었습니다.');
+      navigate('/home');
+    } catch (error) {
+      console.error(error);
+      alert('프로젝트 의뢰 등록에 실패했습니다.');
+    }
   };
+
+  const handleFileUpload = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+    }
+  };
+
+  useEffect(() => {
+    console.log(projectInfo);
+  }, [projectInfo]);
+
   return (
     <Container>
       <Title>프로젝트 정보 입력</Title>
@@ -70,6 +96,7 @@ const RequestRegistComponent = () => {
               projectInfo['workType'] === 'local' ||
               projectInfo['workType'] === 'both'
             }
+            width={'9.4375rem'}
           />
           <SelectBox
             text={'원격'}
@@ -78,6 +105,7 @@ const RequestRegistComponent = () => {
               projectInfo['workType'] === 'remote' ||
               projectInfo['workType'] === 'both'
             }
+            width={'9.4375rem'}
           />
         </HorizontalContainer>
         <StarLabel text={'프로젝트 진행 분류'} />
@@ -86,24 +114,15 @@ const RequestRegistComponent = () => {
             text={'신규'}
             handler={() => handleprogressClassification('new')}
             info={projectInfo['progressClassification'] === 'new'}
+            width={'9.4375rem'}
           />
           <SelectBox
             text={'리뉴얼'}
             handler={() => handleprogressClassification('renewal')}
             info={projectInfo['progressClassification'] === 'renewal'}
+            width={'9.4375rem'}
           />
         </HorizontalContainer>
-      </ContentsContainer>
-      <ContentsContainer>
-        <StarLabel text={'회사 이름'} />
-        <InputText
-          placeHolder={'회사 이름 또는 프로젝트를 대표하는 이름을 적어주세요.'}
-          type={'text'}
-          width={'100'}
-          keyName={'companyName'}
-        />
-        <StarLabel text={'회사 로고'} />
-        <InputText type={'text'} />
       </ContentsContainer>
       <ContentsContainer>
         <StarLabel text={'프로젝트 주제'} />
@@ -124,74 +143,40 @@ const RequestRegistComponent = () => {
       </ContentsContainer>
       <ContentsContainer>
         <StarLabel text={'필요 직군'} />
-        <RoleContainer>
-          <HorizontalContainer>
-            <Text>클라이언트</Text>
-            <InputText
-              type={'number'}
-              width={'23'}
-              keyName={'requiredClient'}
-            />
-            <Text>명</Text>
-          </HorizontalContainer>
-          <HorizontalContainer>
-            <Text>서버</Text>
-            <InputText
-              type={'number'}
-              width={'23'}
-              keyName={'requiredServer'}
-            />
-            <Text>명</Text>
-          </HorizontalContainer>
-          <HorizontalContainer>
-            <Text>디자인</Text>
-            <InputText
-              type={'number'}
-              width={'23'}
-              keyName={'requiredDesign'}
-            />
-            <Text>명</Text>
-          </HorizontalContainer>
-          <HorizontalContainer>
-            <Text>기획</Text>
-            <InputText
-              type={'number'}
-              width={'23'}
-              keyName={'requiredPlanner'}
-            />
-            <Text>명</Text>
-          </HorizontalContainer>
-          <HorizontalContainer>
-            <Text>AI</Text>
-            <InputText
-              type={'number'}
-              width={'23'}
-              keyName={'requiredAIEngineer'}
-            />
-            <Text>명</Text>
-          </HorizontalContainer>
-        </RoleContainer>
+        <SelectComponent onAddSelectLabel={addSelectLabel} />
+        <HorizontalContainer>
+          {selectedOptions.map((option, index) => (
+            <SelectLabel key={index} selectedOption={option} />
+          ))}
+        </HorizontalContainer>
       </ContentsContainer>
       <ContentsContainer>
         <StarLabel text={'예상 기간'} />
         <HorizontalContainer>
+          <BlackLabel>예상 시작 날짜</BlackLabel>
           <InputText
-            placeHolder={'YY/MM/DD'}
+            placeHolder={'YY-MM-DD'}
             type={'date'}
-            keyName={'startDateTime'}
+            keyName={'startDate'}
+            width={'6rem'}
           />
-          <Text>~</Text>
+          <BlackLabel>예상 종료 날짜</BlackLabel>
           <InputText
-            placeHolder={'YY/MM/DD'}
+            placeHolder={'YY-MM-DD'}
             type={'date'}
-            keyName={'endDateTime'}
+            keyName={'endDate'}
+            width={'6rem'}
           />
         </HorizontalContainer>
       </ContentsContainer>
       <ContentsContainer>
         <StarLabel text={'예상 금액'} />
         <HorizontalContainer>
-          <InputText type={'number'} keyName={'estimatedCost'} />
+          <InputText
+            type={'number'}
+            keyName={'estimatedCost'}
+            width={'6.75rem'}
+          />
           <Text>원</Text>
         </HorizontalContainer>
       </ContentsContainer>

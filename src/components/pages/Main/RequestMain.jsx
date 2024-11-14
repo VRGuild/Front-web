@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { getHomeRequests } from '../../../api/request';
 
 const RequestMain = () => {
-  const [requestData, setRequestData] = useState([]);
+  const [requestData, setRequestData] = useState({ previewDTOList: [] });
   const navigate = useNavigate();
   const registRequest = () => {
     navigate('/project/regist');
@@ -34,7 +34,7 @@ const RequestMain = () => {
         count={requestData.totalProjectCnt}
         showMore={showMore}
       />
-      {requestData.data?.map((request, index) => (
+      {requestData.previewDTOList.map((request, index) => (
         <RequestCard key={index} requestData={request} />
       ))}
     </Container>

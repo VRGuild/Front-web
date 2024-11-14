@@ -32,7 +32,7 @@ export const Title = styled.p`
   line-height: 0.9375rem;
 `;
 export const SemiTitle = styled.p`
-  color: #1b75d0;
+  color: #393939;
   text-align: center;
   font-family: 'Noto Sans KR';
   font-size: 1.875rem;
@@ -58,15 +58,15 @@ export const SelectBox = styled.button`
   align-items: center;
   padding: 1rem;
   border-radius: 0.3125rem;
-  border: 1px solid #1b75d0;
+  border: 1px solid #393939;
   background: #fff;
 `;
 
 export const SelectButton = styled.div`
   width: 0.9375rem;
   height: 0.9375rem;
-  background-color: ${(props) => (props.info ? '#1b75d0' : '#fff')};
-  border: 1px solid #1b75d0;
+  background-color: ${(props) => (props.info ? '#393939' : '#fff')};
+  border: 1px solid #393939;
   border-radius: 100%;
 `;
 export const RegisterInfoContainer = styled.div`
@@ -77,7 +77,7 @@ export const RegisterInfoContainer = styled.div`
   align-items: flex-start;
 `;
 export const RegisterInfoTitle = styled.p`
-  color: #1b75d0;
+  color: #393939;
   text-align: center;
   font-family: 'Noto Sans KR';
   font-size: 1rem;
@@ -86,7 +86,7 @@ export const RegisterInfoTitle = styled.p`
   line-height: 0.9375rem;
 `;
 export const RegisterInfo = styled.p`
-  color: #1b75d0;
+  color: #393939;
   text-align: center;
   font-family: 'Noto Sans KR';
   font-size: 0.75rem;

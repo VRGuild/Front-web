@@ -35,10 +35,10 @@ export const LikeIcon = styled.img`
 
 export const Title = styled.p`
   color: #000;
-  font-family: 'Noto Sans KR';
+  font-family: Pretendard;
   font-size: 1.25rem;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.91438rem;
   white-space: nowrap;
   overflow: hidden;
@@ -64,4 +64,8 @@ export const StyledLink = styled(Link)`
   display: block;
   text-decoration: none;
   width: 100%;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `;

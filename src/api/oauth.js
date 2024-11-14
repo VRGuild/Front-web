@@ -42,7 +42,6 @@ export const getToken = async () => {
     });
     localStorage.setItem('accessToken', res.data.access_token);
     localStorage.setItem('refreshToken', res.data.refresh_token);
-    console.log(res);
   } catch (error) {
     console.error(error);
   }
@@ -99,31 +98,21 @@ export const checkIsRegisted = async () => {
   }
 };
 
-export const registClientGroup = async ({
-  clientType,
-  groupName,
+export const registClient = async ({
+  nickName,
+  businessName,
+  businessLogo,
   managerName,
   managerPhone,
 }) => {
   try {
-    const res = await PostAxiosInstance('/api/user/group', {
-      clientType,
-      groupName,
-      managerName,
-      managerPhone,
-    });
-    return res;
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-export const registClientIndividual = async ({ name, phone }) => {
-  try {
-    const res = await PostAxiosInstance('/api/user/individual', {
-      name: name,
-      phone: phone,
-    });
+    const formData = new FormData();
+    formData.append('nickName', nickName);
+    formData.append('businessName', businessName);
+    formData.append('businessLogo', businessLogo);
+    formData.append('managerName', managerName);
+    formData.append('managerPhone', managerPhone);
+    const res = await PostAxiosInstance('/api/epic/businesses', formData);
     return res;
   } catch (e) {
     console.error(e);

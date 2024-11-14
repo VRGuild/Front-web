@@ -60,8 +60,8 @@ export const FilterButton = styled.button`
   align-items: flex-end;
   text-align: center;
   border-radius: 0.375rem;
-  border: 1px solid #1b75d0;
-  color: #1b75d0;
+  border: 1px solid #393939;
+  color: #393939;
   text-align: center;
   font-family: 'Segoe UI';
   font-size: 0.75rem;

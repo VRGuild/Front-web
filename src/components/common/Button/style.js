@@ -8,9 +8,9 @@ export const CustomButton = styled.button`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background-color: ${(props) => props.bgcolor || '#1B75D0'};
+  background-color: ${(props) => props.bgcolor || '#393939'};
   color: ${(props) => props.fontcolor || '#fff'};
-  border-color: ${(props) => props.bordercolor || '#1B75D0'};
+  border-color: ${(props) => props.bordercolor || '#393939'};
   text-align: center;
   font-size: 0.8125rem;
   font-style: normal;

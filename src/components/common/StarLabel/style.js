@@ -10,19 +10,18 @@ export const Container = styled.div`
 
 export const Text = styled.p`
   color: #000;
-  text-align: center;
-  font-family: 'Noto Sans KR';
-  font-size: 0.875rem;
+  font-family: Pretendard;
+  font-size: 1.25rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 0.9375rem;
 `;
 
 export const Star = styled.p`
   color: #dc1c1c;
-  font-family: 'Noto Sans KR';
-  font-size: 0.875rem;
+  font-family: Pretendard;
+  font-size: 1.25rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 0.9375rem;
 `;

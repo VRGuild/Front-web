@@ -10,8 +10,24 @@ import RegistProject from './pages/Request/RegistProject';
 import RequestHome from './pages/Request/RequestHome';
 import RequestDetail from './pages/Request/RequestDetail';
 import Callback from './auth/Callback';
+import useStore from './zustand/Store';
 
 function App() {
+  const { setIsLogin } = useStore();
+
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const token = localStorage.getItem('accessToken');
+      setIsLogin(!!token);
+    };
+
+    checkLoginStatus();
+    window.addEventListener('storage', checkLoginStatus);
+
+    return () => {
+      window.removeEventListener('storage', checkLoginStatus);
+    };
+  }, []);
   return (
     <BrowserRouter>
       <Routes>

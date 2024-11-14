@@ -14,7 +14,7 @@ export const Container = styled.div`
 `;
 
 export const QuestionTitle = styled.p`
-  color: #1b75d0;
+  color: #393939;
   font-family: 'Noto Sans KR';
   font-size: 0.875rem;
   font-style: normal;

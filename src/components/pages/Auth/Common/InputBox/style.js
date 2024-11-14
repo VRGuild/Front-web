@@ -15,7 +15,7 @@ export const Container = styled.input`
 `;
 export const Label = styled.label`
   border-radius: 0.125rem;
-  border: 1px solid #1b75d0;
+  border: 1px solid #393939;
   position: relative;
   width: 100%;
   height: 2.5625rem;

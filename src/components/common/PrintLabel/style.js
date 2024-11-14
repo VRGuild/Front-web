@@ -17,7 +17,7 @@ export const Container = styled.div`
   line-height: 0.9375rem;
   text-align: ${(props) => (props.isTextBox ? 'left' : 'right')};
   border-radius: 0.125rem;
-  border: 1px solid #1b75d0;
+  border: 1px solid #393939;
   overflow-wrap: break-word;
   word-break: break-word;
   white-space: normal;

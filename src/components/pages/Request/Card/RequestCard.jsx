@@ -34,34 +34,33 @@ const RequestCard = ({ requestData }) => {
       const differenceInTime = deadline - today;
       const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
       setDeadLine(differenceInDays);
+      console.log(requestData);
     };
     calculateDaysUntilDeadline();
   }, [requestData]);
   return (
     <>
-      {requestData && (
-        <Container>
-          <TopContainer>
-            <InfoLabelContainer>
-              {labelData.map((text, index) => (
-                <InfoLabel key={index} text={text} />
-              ))}
-            </InfoLabelContainer>
-            <LikeIcon src={linkIcon} />
-          </TopContainer>
-          <StyledLink to={`/project/${requestData.projectId}`}>
-            <Title>{requestData.previewTitle}</Title>
-          </StyledLink>
-          <BottomContainer>
-            <LabelContainer>
-              {requestData?.requiredWorkers.map((text, index) => (
-                <Label key={index} text={text} />
-              ))}
-            </LabelContainer>
-            <Label text={'마감까지 ' + deadLine + '일'} />
-          </BottomContainer>
-        </Container>
-      )}
+      <Container>
+        <TopContainer>
+          <InfoLabelContainer>
+            {labelData.map((text, index) => (
+              <InfoLabel key={index} text={text} />
+            ))}
+          </InfoLabelContainer>
+          <LikeIcon src={linkIcon} />
+        </TopContainer>
+        <StyledLink to={`/project/${requestData.projectId}`}>
+          <Title>{requestData.previewTitle}</Title>
+        </StyledLink>
+        <BottomContainer>
+          <LabelContainer>
+            {requestData?.requiredOccupationNameList.map((text, index) => (
+              <Label key={index} text={text} />
+            ))}
+          </LabelContainer>
+          <Label text={'마감까지 ' + deadLine + '일'} />
+        </BottomContainer>
+      </Container>
     </>
   );
 };

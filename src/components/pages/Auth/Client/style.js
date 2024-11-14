@@ -36,12 +36,12 @@ export const BoxContainer = styled.div`
   height: 80%;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 2rem;
 `;
 
 export const Box = styled.div`
   width: 100%;
-  height: 50%;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;

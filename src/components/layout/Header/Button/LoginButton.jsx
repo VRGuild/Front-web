@@ -3,23 +3,26 @@ import { ButtonContainer } from './style';
 import Button from '../../../common/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { getRefresh, handleloginRedirect } from '../../../../api/oauth';
+import useStore from '../../../../zustand/Store';
 
 const LoginButton = (props) => {
   const navigate = useNavigate();
-  const handleSignupButtonClick = async () => {
-    const refreshToken = localStorage.getItem('refreshToken');
-    const res = getRefresh(refreshToken);
-  };
+
+  const { isLogin } = useStore();
+
   return (
     <ButtonContainer>
-      <Button
-        bgcolor="#fff"
-        fontcolor="#1B75D0"
-        bordercolor="#1B75D0"
-        onClickHandler={handleloginRedirect}
-        text="Log out"
-      />
-      {/* <Button onClickHandler={handleSignupButtonClick} text="Sign up" /> */}
+      {!isLogin ? (
+        <Button
+          bgcolor="#fff"
+          fontcolor="#393939"
+          bordercolor="#393939"
+          onClickHandler={handleloginRedirect}
+          text="Log in"
+        />
+      ) : (
+        <Button onClickHandler={() => localStorage.clear()} text="Log out" />
+      )}
     </ButtonContainer>
   );
 };

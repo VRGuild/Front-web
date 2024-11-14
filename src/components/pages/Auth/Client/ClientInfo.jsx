@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useStore from '../../../../zustand/Store';
 import InputBox from '../Common/InputBox/InputBox';
-import SelectBox from '../../../common/SelectBox/SelectBox';
 import {
   Container,
   Title,
@@ -17,65 +16,56 @@ import {
 } from './style';
 import Button from '../../../common/Button/Button';
 import StarLabel from '../../../common/StarLabel/StarLabel';
-import {
-  registClientGroup,
-  registClientIndividual,
-} from '../../../../api/oauth';
+import { registClient } from '../../../../api/oauth';
 import { useNavigate } from 'react-router-dom';
 
 const ClientInfo = () => {
-  const { clientInfo, setClientInfo, setRegistPage } = useStore();
-  const [groupName, setGroupName] = useState('');
+  const { setRegistPage } = useStore();
+  const [nickName, setNickName] = useState('');
+  const [businessName, setBusinessName] = useState('');
   const [managerName, setManagerName] = useState('');
   const [managerPhone, setManagerPhone] = useState('');
+  const [businessLogo, setBusinessLogo] = useState(null);
   const [isChecked, setIschecked] = useState(false);
   const [isValidate, setIsValidate] = useState(false);
+
   const navigate = useNavigate();
+
   const handlePrevButtonClick = () => {
     setRegistPage(0);
   };
-  const selectCorporateBusiness = () => {
-    setClientInfo('corporate business');
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setBusinessLogo(file);
+    }
   };
-  const selectIndividualBusiness = () => {
-    setClientInfo('individual business');
-  };
-  const selectTeam = () => {
-    setClientInfo('team');
-  };
-  const selectIndividual = () => {
-    setClientInfo('individual');
-  };
+
   const handleIsValidate = () => {
     if (isChecked) {
-      if (clientInfo === 'individual') {
-        setIsValidate(managerName !== '' && managerPhone !== '');
-      } else {
-        if (clientInfo !== '') {
-          setIsValidate(
-            groupName !== '' && managerName !== '' && managerPhone !== '',
-          );
-        }
-      }
+      setIsValidate(
+        nickName !== '' &&
+          businessName !== '' &&
+          managerName !== '' &&
+          managerPhone !== '' &&
+          businessLogo !== null,
+      );
     } else {
       setIsValidate(false);
     }
   };
+
   const handleFinishButtonClick = async () => {
     try {
-      if (clientInfo === 'individual') {
-        await registClientIndividual({
-          name: managerName,
-          phone: managerPhone,
-        });
-      } else {
-        await registClientGroup({
-          clientType: clientInfo,
-          groupName: groupName,
-          managerName: managerName,
-          managerPhone: managerPhone,
-        });
-      }
+      await registClient({
+        nickName: nickName,
+        businessName: businessName,
+        businessLogo: businessLogo,
+        managerName: managerName,
+        managerPhone: managerPhone,
+      });
+
       navigate('/home');
     } catch (e) {
       console.error(e);
@@ -88,68 +78,53 @@ const ClientInfo = () => {
     } catch (e) {
       console.error(e);
     }
-  }, [clientInfo, groupName, managerName, managerPhone, isChecked]);
+  }, [
+    nickName,
+    businessName,
+    businessLogo,
+    managerName,
+    managerPhone,
+    isChecked,
+  ]);
+
+  useEffect(() => {
+    console.log(businessLogo);
+  }, [businessLogo]);
+
   return (
     <Container>
       <Title>클라이언트 정보 입력</Title>
       <ContentContainer>
         <BoxContainer>
           <Box>
-            <StarLabel text={'클라이언트 형태'} />
-            <SelectBox
-              info={clientInfo === 'corporate business'}
-              handler={selectCorporateBusiness}
-              text={'법인 사업자'}
-            />
-            <SelectBox
-              info={clientInfo === 'individual business'}
-              handler={selectIndividualBusiness}
-              text={'개인 사업자'}
-            />
-            <SelectBox
-              info={clientInfo === 'team'}
-              handler={selectTeam}
-              text={'팀'}
-            />
-            <SelectBox
-              info={clientInfo === 'individual'}
-              handler={selectIndividual}
-              text={'개인'}
+            <StarLabel text={'가입자 정보'} />
+            <InputBox
+              placeholder={'닉네임'}
+              onChangeHandler={(e) => setNickName(e.target.value)}
             />
           </Box>
           <Box>
-            <StarLabel text={'클라이언트 정보'} />
-            {clientInfo === 'individual' ? (
-              <>
-                <InputBox
-                  placeholder={'이름'}
-                  onChangeHandler={(e) => setManagerName(e.target.value)}
-                />
-                <InputBox
-                  placeholder={'핸드폰 번호'}
-                  onChangeHandler={(e) => setManagerPhone(e.target.value)}
-                />
-              </>
-            ) : (
-              <>
-                <InputBox
-                  placeholder={'회사명/팀명'}
-                  onChangeHandler={(e) => setGroupName(e.target.value)}
-                />
-                <InputBox
-                  placeholder={'담당자 이름'}
-                  onChangeHandler={(e) => setManagerName(e.target.value)}
-                />
-                <InputBox
-                  placeholder={'담당자 핸드폰 번호'}
-                  onChangeHandler={(e) => setManagerPhone(e.target.value)}
-                />
-              </>
-            )}
+            <StarLabel text={'비즈니스 정보'} />
+            <InputBox
+              placeholder={'회사명/팀명'}
+              onChangeHandler={(e) => setBusinessName(e.target.value)}
+            />
+            <InputBox
+              placeholder={'담당자 이름'}
+              onChangeHandler={(e) => setManagerName(e.target.value)}
+            />
+            <InputBox
+              placeholder={'담당자 핸드폰 번호'}
+              onChangeHandler={(e) => setManagerPhone(e.target.value)}
+            />
 
             <Text>
               • 회사명, 이름, 연락처 등 개인 정보는 공개되지 않습니다.
             </Text>
+          </Box>
+          <Box>
+            <StarLabel text={'회사 로고'} />
+            <InputBox onChangeHandler={handleFileChange} type={'file'} />
           </Box>
         </BoxContainer>
         <BottomContainer>
@@ -167,8 +142,8 @@ const ClientInfo = () => {
           <ButtonContainer>
             <Button
               bgcolor={'#fff'}
-              fontcolor={'#1B75D0'}
-              bordercolor={'#1b75d0'}
+              fontcolor={'#393939'}
+              bordercolor={'#393939'}
               onClickHandler={handlePrevButtonClick}
               text={'이전'}
             />

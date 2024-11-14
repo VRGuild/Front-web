@@ -9,15 +9,14 @@ export const Container = styled.div`
   gap: 2rem;
   justify-content: flex-start;
   align-items: flex-start;
-  border: 1px solid #000;
 `;
 
 export const Title = styled.p`
   color: #000;
-  font-family: 'Noto Sans KR';
+  font-family: Pretendard;
   font-size: 1.875rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 800;
   line-height: 0.9375rem;
 `;
 
@@ -32,11 +31,11 @@ export const Text = styled.p`
 
 export const TinyText = styled.p`
   color: #626262;
-  font-family: 'Noto Sans KR';
+  font-family: Pretendard;
   font-size: 0.5rem;
   font-style: normal;
-  font-weight: 400;
-  line-height: 0.9375rem;
+  font-weight: 600;
+  line-height: 0.9375rem; /* 187.5% */
 `;
 
 export const ContentsContainer = styled.div`
@@ -49,7 +48,7 @@ export const ContentsContainer = styled.div`
 `;
 
 export const HorizontalContainer = styled.div`
-  width: 100%;
+  width: ${(props) => (props.width ? props.width : '100')}%;
   display: flex;
   gap: 0.5rem;
   justify-content: flex-start;
@@ -69,4 +68,22 @@ export const ButtonContainer = styled.div`
   width: 100%;
   justify-content: flex-end;
   align-items: center;
+`;
+
+export const BlackLabel = styled.div`
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 7.5625rem;
+  height: 1.775rem;
+  border-radius: 0.25rem;
+  border: 1px solid #393939;
+  background: #393939;
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 0.6875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 0.9375rem;
 `;

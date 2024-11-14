@@ -7,12 +7,12 @@ export const Label = styled.div`
   align-items: center;
   text-align: center;
   padding: 0.06rem 0.56rem 0.06rem 0.56rem;
-  background-color: #c8e0f9;
+  background-color: #494949;
   border-radius: 0.25rem;
   border: 1px solid #fff;
-  color: #000;
+  color: #fff;
   text-align: center;
-  font-family: 'Noto Sans KR';
+  font-family: Pretendard;
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 700;

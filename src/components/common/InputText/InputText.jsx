@@ -9,10 +9,17 @@ const InputText = (props) => {
     let value = e.target.value;
 
     if (props.type === 'number') {
-      if (value === '') {
-        setProjectInfo({ [props.keyName]: '' });
-      } else if (/^\d*$/.test(value)) {
-        setProjectInfo({ [props.keyName]: parseInt(value) });
+      const unformattedValue = value.replace(/,/g, '');
+      if (/^\d*$/.test(unformattedValue)) {
+        setProjectInfo({
+          [props.keyName]: unformattedValue ? parseInt(unformattedValue) : '',
+        });
+
+        const formattedValue = unformattedValue.replace(
+          /\B(?=(\d{3})+(?!\d))/g,
+          ',',
+        );
+        e.target.value = formattedValue;
       }
     } else if (props.type === 'date') {
       value = value.replace(/-/g, '');
@@ -50,7 +57,13 @@ const InputText = (props) => {
       ) : (
         <InputContainer
           type="text"
-          value={projectInfo[props.keyName]}
+          value={
+            props.type === 'number'
+              ? projectInfo[props.keyName]
+                  ?.toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',') || ''
+              : projectInfo[props.keyName]
+          }
           onChange={handleChange}
           placeholder={props.placeHolder}
           height={props.height}
