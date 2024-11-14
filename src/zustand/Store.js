@@ -82,7 +82,7 @@ const useStore = create((set) => ({
         };
       }
     }),
-  isLogin: false,
+  isLogin: true,
   setIsLogin: (login) => set({ isLogin: login }),
 }));
 
