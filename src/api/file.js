@@ -5,11 +5,7 @@ export const uploadFiles = async (file, filepath) => {
   formData.append('multipartFiles', file);
   formData.append('filePath', filepath);
   try {
-    const res = await PostAxiosInstance(
-      '/api/files',
-      { 'Content-Type': 'multipart/formdata' },
-      formData,
-    );
+    const res = await PostAxiosInstance('/api/files', formData);
     return res;
   } catch (error) {
     console.error(error);

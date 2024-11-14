@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { GetAxiosInstance, PostAxiosInstance } from '../axios/AxiosMethod';
+import { uploadFiles } from './file';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 const url = `${import.meta.env.VITE_LOGIN_URL}${import.meta.env.VITE_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_REDIRECT_URL}&response_type=code&scope=basic_profile&scope=friends_list&scope=presence`;
@@ -106,14 +107,14 @@ export const registClient = async ({
   managerPhone,
 }) => {
   try {
-    const formData = new FormData();
-    formData.append('nickName', nickName);
-    formData.append('businessName', businessName);
-    formData.append('businessLogo', businessLogo);
-    formData.append('managerName', managerName);
-    formData.append('managerPhone', managerPhone);
-    const res = await PostAxiosInstance('/api/epic/businesses', formData);
-    return res;
+    const businessLogoUrl = await uploadFiles(businessLogo, 'logo/');
+    return await PostAxiosInstance('/api/epic/business', {
+      nickName,
+      businessName,
+      businessLogo: businessLogoUrl,
+      managerName,
+      managerPhone,
+    });
   } catch (e) {
     console.error(e);
   }
