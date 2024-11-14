@@ -17,7 +17,7 @@ const Content = styled.div`
   width: 100%;
   height: 100%;
   margin-top: ${(props) => props.headerHeight}rem;
-  padding-bottom: 10rem;
+  padding-bottom: 3rem;
 `;
 
 const Layout = () => {

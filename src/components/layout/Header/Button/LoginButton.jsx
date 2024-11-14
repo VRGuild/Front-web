@@ -6,8 +6,6 @@ import { getRefresh, handleloginRedirect } from '../../../../api/oauth';
 import useStore from '../../../../zustand/Store';
 
 const LoginButton = (props) => {
-  const navigate = useNavigate();
-
   const { isLogin, setIsLogin } = useStore();
 
   return (
@@ -25,6 +23,7 @@ const LoginButton = (props) => {
           onClickHandler={() => {
             localStorage.clear();
             setIsLogin(false);
+            window.location.reload;
           }}
           text="Log out"
         />

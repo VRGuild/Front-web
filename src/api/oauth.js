@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { GetAxiosInstance, PostAxiosInstance } from '../axios/AxiosMethod';
 import { uploadFiles } from './file';
+import useStore from '../zustand/Store';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 const url = `${import.meta.env.VITE_LOGIN_URL}${import.meta.env.VITE_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_REDIRECT_URL}&response_type=code&scope=basic_profile&scope=friends_list&scope=presence`;
