@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import useStore from '../../../../zustand/Store';
+import { useStore } from '../../../../zustand/Store';
 import { Container, NumberButtonContainer, MoreText } from './style';
 import NextPrevButton from '../NextPrevButton/NextPrevButton';
 import NumberButton from '../NumberButton/NumberButton';

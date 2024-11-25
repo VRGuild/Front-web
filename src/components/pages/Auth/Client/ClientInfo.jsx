@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useStore from '../../../../zustand/Store';
+import { useStore, usePersistentStore } from '../../../../zustand/Store';
 import InputBox from '../Common/InputBox/InputBox';
 import {
   Container,
@@ -20,7 +20,7 @@ import { registClient } from '../../../../api/oauth';
 import { useNavigate } from 'react-router-dom';
 
 const ClientInfo = () => {
-  const { setRegistPage, setIsLogin } = useStore();
+  const { setRegistPage, setIsLogin } = usePersistentStore();
   const [nickName, setNickName] = useState('');
   const [businessName, setBusinessName] = useState('');
   const [managerName, setManagerName] = useState('');

@@ -3,10 +3,10 @@ import { ButtonContainer } from './style';
 import Button from '../../../common/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { getRefresh, handleloginRedirect } from '../../../../api/oauth';
-import useStore from '../../../../zustand/Store';
+import { useStore, usePersistentStore } from '../../../../zustand/Store';
 
 const LoginButton = (props) => {
-  const { isLogin, setIsLogin } = useStore();
+  const { isLogin, setIsLogin } = usePersistentStore();
 
   return (
     <ButtonContainer>

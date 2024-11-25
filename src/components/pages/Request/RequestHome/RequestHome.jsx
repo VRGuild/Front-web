@@ -5,7 +5,7 @@ import TopContainer from '../../Home/Main/ContainerComponent/TopContainer/TopCon
 import RequestCard from '../Card/RequestCard';
 import PageNationComponent from '../../../common/PageNation/PageNationContainer/PageNationComponent';
 import { getAllRequests } from '../../../../api/request';
-import useStore from '../../../../zustand/Store';
+import { useStore } from '../../../../zustand/Store';
 const RequestHomeComponent = () => {
   const { detailPage, setTotalPage } = useStore();
   const [requestInfo, setRequestInfo] = useState();
@@ -17,6 +17,7 @@ const RequestHomeComponent = () => {
     const getAllList = async () => {
       try {
         const res = await getAllRequests(detailPage);
+        console.log(res);
         setRequestInfo(res.data);
         setTotalPage(res.data.totalPages);
       } catch (e) {
@@ -36,7 +37,7 @@ const RequestHomeComponent = () => {
             count={requestInfo.totalProjectCnt}
             isNotHome={true}
           />
-          {requestInfo.data?.map((request, index) => (
+          {requestInfo.previewDTOList.map((request, index) => (
             <RequestCard key={index} requestData={request} />
           ))}
           <PageContainer>

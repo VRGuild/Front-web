@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { checkIsRegisted, getToken } from '../api/oauth';
 import { useNavigate } from 'react-router-dom';
-import useStore from '../zustand/Store';
+import { useStore, usePersistentStore } from '../zustand/Store';
 const Callback = () => {
   const navigate = useNavigate();
-  const { setIsLogin } = useStore();
+  const { setIsLogin } = usePersistentStore();
   useEffect(() => {
     const getAccessToken = async () => {
       await getToken();

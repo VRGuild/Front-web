@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import useStore from '../../../../zustand/Store';
+import { useStore } from '../../../../zustand/Store';
 import { Container, NumberInput, PageMoveButton } from './style';
 
 const PageInput = () => {

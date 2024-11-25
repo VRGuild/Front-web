@@ -4,7 +4,7 @@ import RegistStart from '../RegistStart/RegistStart';
 import ClientInfo from '../Client/ClientInfo';
 import PartnersInfo from '../Partners/PartnersInfo/PartnersInfo';
 import PartnersSkill from '../Partners/PartnersSkill/PartnersSkill';
-import useStore from '../../../../zustand/Store';
+import { useStore } from '../../../../zustand/Store';
 const RegistComponent = () => {
   const { registPage } = useStore();
   const renderPage = (page) => {

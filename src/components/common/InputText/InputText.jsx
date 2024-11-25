@@ -1,6 +1,6 @@
 import React from 'react';
 import { InputContainer, TextArea } from './style';
-import useStore from '../../../zustand/Store';
+import { useStore } from '../../../zustand/Store';
 
 const InputText = (props) => {
   const { projectInfo, setProjectInfo } = useStore();

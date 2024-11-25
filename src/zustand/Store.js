@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-
+import { persist, createJSONStorage } from 'zustand/middleware';
 const useStore = create((set) => ({
   sortingCriteria: 'best',
   setSorting: (sort) => set({ sortingCriteria: sort }),
@@ -82,27 +82,19 @@ const useStore = create((set) => ({
         };
       }
     }),
-  isLogin: true,
-  setIsLogin: (login) => set({ isLogin: login }),
 }));
 
-export default useStore;
-
-/*
-{
-  "userId": 0,
-  "title": "string",
-  "content": "string",
-  "estimatedCost": 0,
-  "progressClassification": "string",
-  "workType": "string",
-  "requiredOccupationList": [
+const usePersistentStore = create(
+  persist(
+    (set) => ({
+      isLogin: false,
+      setIsLogin: (login) => set({ isLogin: login }),
+    }),
     {
-      "occupationName": "string",
-      "occupationCount": 0
-    }
-  ],
-  "startDate": "2024-11-13",
-  "endDate": "2024-11-13"
-}
-*/
+      name: 'login-storage',
+      storage: createJSONStorage(() => sessionStorage),
+    },
+  ),
+);
+
+export { useStore, usePersistentStore };

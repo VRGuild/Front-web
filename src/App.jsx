@@ -9,8 +9,9 @@ import QnaDetail from './pages/Qna/QnaDetail';
 import RegistProject from './pages/Request/RegistProject';
 import RequestHome from './pages/Request/RequestHome';
 import RequestDetail from './pages/Request/RequestDetail';
+// import ProjectSupport
 import Callback from './auth/Callback';
-import useStore from './zustand/Store';
+import { useStore } from './zustand/Store';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="project" element={<RequestHome />} />
           <Route path="project/:requestId" element={<RequestDetail />} />
           <Route path="project/regist" element={<RegistProject />} />
+          {/* <Route path="project/support" element={<ProjectSupport />} /> */}
         </Route>
         {/* User Regist */}
         <Route path="/regist" element={<Regist />} />

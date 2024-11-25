@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input, Label, LabelContainer } from './style';
-import useStore from '../../../zustand/Store';
+import { useStore } from '../../../zustand/Store';
 
 const SelectLabel = ({ selectedOption }) => {
   const { updateOccupation } = useStore();

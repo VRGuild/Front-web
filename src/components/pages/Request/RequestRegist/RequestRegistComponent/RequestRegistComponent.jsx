@@ -14,7 +14,7 @@ import StarLabel from '../../../../common/StarLabel/StarLabel';
 import SelectBox from '../../../../common/SelectBox/SelectBox';
 import InputText from '../../../../common/InputText/InputText';
 import Button from '../../../../common/Button/Button';
-import useStore from '../../../../../zustand/Store';
+import { useStore } from '../../../../../zustand/Store';
 import { registRequestInfo } from '../../../../../api/request';
 import { useNavigate } from 'react-router-dom';
 import SelectComponent from '../../../../common/SelectComponent/SelectComponent';

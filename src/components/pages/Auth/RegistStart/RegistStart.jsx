@@ -13,7 +13,7 @@ import {
   SelectButton,
 } from './style';
 import Button from '../../../common/Button/Button';
-import useStore from '../../../../zustand/Store';
+import { useStore } from '../../../../zustand/Store';
 import StarLabel from '../../../common/StarLabel/StarLabel';
 import clientIcon from '../../../../assets/svgs/client_icon.svg';
 import partnersIcon from '../../../../assets/svgs/partners_icon.svg';

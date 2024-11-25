@@ -1,5 +1,5 @@
 import React from 'react';
-import useStore from '../../../../zustand/Store';
+import { useStore } from '../../../../zustand/Store';
 import { UnClickedButton, ClickedButton } from './style';
 
 const NumberButton = ({ page }) => {
