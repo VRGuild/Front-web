@@ -26,8 +26,9 @@ export const Title = styled.div`
 export const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
+  margin-bottom: 2rem;
 `;
 
 export const Text = styled.div`

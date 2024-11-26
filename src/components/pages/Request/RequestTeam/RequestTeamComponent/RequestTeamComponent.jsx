@@ -10,7 +10,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { acceptTeam, getTeamData } from '../../../../../api/request';
 import Button from '../../../../common/Button/Button';
 import RequestTeamCard from '../RequestTeamCard/RequestTeamCard';
-const RequestTeamComponent = ({ detailData }) => {
+const RequestTeamComponent = ({ detailData, setIsRequest }) => {
   const { requestId } = useParams();
   const [teamData, setTeamData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -24,6 +24,9 @@ const RequestTeamComponent = ({ detailData }) => {
     } else {
       alert('잘못된 응답입니다. 다시 선택해주세요.');
     }
+  };
+  const handlePrevButtonClick = () => {
+    setIsRequest(false);
   };
   useEffect(() => {
     const getData = async () => {
@@ -41,7 +44,13 @@ const RequestTeamComponent = ({ detailData }) => {
         <Container>
           <Title>{detailData.projectInfo.title}</Title>
           <ButtonContainer>
-            <Button text={'지원하기'} onClickHandler={handleButtonClick} />
+            <Button
+              text={'이전'}
+              onClickHandler={handlePrevButtonClick}
+              bgcolor={'#fff'}
+              fontcolor={'#393939'}
+            />
+            <Button text={'선택완료'} onClickHandler={handleButtonClick} />
           </ButtonContainer>
           <Text>함께하고 싶은 팀을 선택해주세요.</Text>
           <CardContainer>

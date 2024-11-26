@@ -102,7 +102,6 @@ export const UnderLinedLabel = styled.p`
 `;
 
 export const CompanyLogo = styled.img`
-  width: 11.125rem;
   height: 11.125rem;
 `;
 

@@ -59,7 +59,7 @@ const ClientInfo = () => {
   const handleFinishButtonClick = async () => {
     try {
       await registClient({
-        nickName: nickName,
+        nickname: nickName,
         businessName: businessName,
         businessLogo: businessLogo,
         managerName: managerName,

@@ -101,7 +101,7 @@ export const checkIsRegisted = async () => {
 };
 
 export const registClient = async ({
-  nickName,
+  nickname,
   businessName,
   businessLogo,
   managerName,
@@ -113,7 +113,7 @@ export const registClient = async ({
     fileURLs = res.data.fileURLs;
     const businessLogoUrl = fileURLs[0];
     await PostAxiosInstance('/api/epic/businesses', {
-      nickName,
+      nickname,
       businessName,
       businessLogoImg: businessLogoUrl,
       managerName,

@@ -20,7 +20,12 @@ const RequestDetail = () => {
     <>
       {isRequest === true ? (
         <MainComponent
-          contents={<RequestTeamComponent detailData={detailData} />}
+          contents={
+            <RequestTeamComponent
+              detailData={detailData}
+              setIsRequest={setIsRequest}
+            />
+          }
         />
       ) : (
         <MainComponent
