@@ -8,7 +8,7 @@ import {
   DataContainer,
   RadarContainer,
 } from './style';
-import StRadar from '../../../../common/Radar/STRadar';
+import StRadar from '../../../../common/Radar/StRadar';
 
 const RequestTeamCard = ({ data, index, setSelectedTeamId }) => {
   const desiredOrder = [
