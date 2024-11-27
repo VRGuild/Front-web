@@ -29,9 +29,6 @@ const RegistStart = () => {
   const handleNextPage = () => {
     setRegistPage(1);
   };
-  useEffect(() => {
-    console.log(registPage);
-  }, [registPage]);
   return (
     <Container>
       <TitleContainer>

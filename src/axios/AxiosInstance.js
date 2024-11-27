@@ -27,7 +27,7 @@ axiosInstance.interceptors.response.use(
 
   async (error) => {
     if (error.response?.data?.status === '449') {
-      console.log('잘못된 토큰');
+      console.error('잘못된 토큰');
       const originalConfig = error.config;
       try {
         const refresh = localStorage.getItem('refreshToken');

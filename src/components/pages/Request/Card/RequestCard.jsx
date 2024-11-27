@@ -34,7 +34,6 @@ const RequestCard = ({ requestData }) => {
       const differenceInTime = deadline - today;
       const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
       setDeadLine(differenceInDays);
-      console.log(requestData);
     };
     calculateDaysUntilDeadline();
   }, [requestData]);

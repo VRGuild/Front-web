@@ -17,7 +17,7 @@ const RequestHomeComponent = () => {
     const getAllList = async () => {
       try {
         const res = await getAllRequests(detailPage);
-        console.log(res);
+
         setRequestInfo(res.data);
         setTotalPage(res.data.totalPages);
       } catch (e) {

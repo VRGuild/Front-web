@@ -87,10 +87,6 @@ const ClientInfo = () => {
     isChecked,
   ]);
 
-  useEffect(() => {
-    console.log(businessLogo);
-  }, [businessLogo]);
-
   return (
     <Container>
       <Title>클라이언트 정보 입력</Title>

@@ -33,7 +33,6 @@ const RequestTeamCard = ({ data, index, setSelectedTeamId }) => {
   };
   useEffect(() => {
     setRadarPoints(getPointAvgsInOrder());
-    console.log(data);
   }, [data]);
 
   return (

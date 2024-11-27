@@ -49,7 +49,6 @@ const RequestRegistComponent = () => {
   };
 
   const transformDate = () => {
-    console.log('실행됨');
     const newProjectInfo = {
       ...projectInfo,
       startDate: '20' + projectInfo['startDate'],
@@ -75,10 +74,6 @@ const RequestRegistComponent = () => {
       setFile(selectedFile);
     }
   };
-
-  useEffect(() => {
-    console.log(projectInfo);
-  }, [projectInfo]);
 
   return (
     <Container>

@@ -92,7 +92,6 @@ export const getRefresh = async (refreshToken) => {
 export const checkIsRegisted = async () => {
   try {
     const res = await GetAxiosInstance('/api/auth/epicgames/login');
-    console.log(res.status);
     if (res?.status == '222') return true;
     else return false;
   } catch (e) {
