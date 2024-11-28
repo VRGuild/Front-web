@@ -59,7 +59,7 @@ const RequestRegistComponent = () => {
 
   const handleRegistButton = async () => {
     try {
-      await registRequestInfo(transformDate());
+      // await registRequestInfo(transformDate());
       alert('프로젝트 의뢰가 등록되었습니다.');
       navigate('/home');
     } catch (error) {
