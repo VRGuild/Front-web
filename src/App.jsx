@@ -12,6 +12,7 @@ import RequestDetail from './pages/Request/RequestDetail';
 // import ProjectSupport
 import Callback from './auth/Callback';
 import { useStore } from './zustand/Store';
+import Last from './pages/Last/Last';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         {/* User Regist */}
         <Route path="/regist" element={<Regist />} />
         <Route path="/callback" element={<Callback />} />
+        <Route path="/last" element={<Last />} />
       </Routes>
     </BrowserRouter>
   );
