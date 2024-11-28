@@ -13,7 +13,7 @@ import StRadar from '../../../../common/Radar/StRadar';
 const RequestTeamCard = ({ data, index, setSelectedTeamId }) => {
   const desiredOrder = [
     'Client',
-    'PM',
+    'Planner',
     'Design',
     'Communication',
     'AI',
