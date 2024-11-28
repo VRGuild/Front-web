@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getRefresh } from '../api/oauth';
+import { usePersistentStore } from '../zustand/Store';
 
 const axiosInstance = axios.create({ baseURL: import.meta.env.VITE_BASE_URL });
 
@@ -7,7 +8,9 @@ axiosInstance.interceptors.request.use(
   async (config) => {
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
+      const { setIsLogin } = usePersistentStore();
       localStorage.clear();
+      setIsLogin(false);
       alert('로그인 해주세요');
       window.location.href = '/home';
       throw new Error('토큰 없음');
